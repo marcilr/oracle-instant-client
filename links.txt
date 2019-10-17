@@ -1,0 +1,6 @@
+links.txt
+Created Thu Oct 17 13:06:42 AKDT 2019
+Copyright (C) 2019 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Oracle Instant Client related links
