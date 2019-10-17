@@ -1,0 +1,98 @@
+INSTALL
+Created Thu Oct 17 13:08:16 AKDT 2019
+Copyright (C) 2019 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Installation of Oracle Instant Client
+
+
+Copy from tomprod to tomdev
+===========================
+On State of Alaska tomdev copied /usr/local/oracle/ from tomprod
+to tomdev using:
+
+ssh tomdev
+su
+cd /usr/local/
+$  time rsync -va --stats --progress dnratwtomprod.dnr.state.ak.us:/usr/local/oracle .
+The authenticity of host 'dnratwtomprod.dnr.state.ak.us (204.89.222.35)' can't be established.
+RSA key fingerprint is e2:23:60:13:fa:ec:88:38:0a:0d:a3:e8:fa:94:fb:05.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'dnratwtomprod.dnr.state.ak.us' (RSA) to the list of known hosts.
+Warning: the RSA host key for 'dnratwtomprod.dnr.state.ak.us' \
+differs from the key for the IP address '204.89.222.35'
+Offending key for IP in /root/.ssh/known_hosts:11
+Are you sure you want to continue connecting (yes/no)? yes
+Password:  ***
+receiving incremental file list
+oracle/
+oracle/oradiag_tomcat/
+oracle/oradiag_tomcat/diag/
+...
+Number of files: 10652
+Number of files transferred: 151
+Total file size: 1515073062 bytes
+Total transferred file size: 70708891 bytes
+Literal data: 68743844 bytes
+Matched data: 1965047 bytes
+File list size: 218066
+File list generation time: 0.001 seconds
+File list transfer time: 0.000 seconds
+Total bytes sent: 21043
+Total bytes received: 68992530
+
+sent 21043 bytes  received 68992530 bytes  730302.36 bytes/sec
+total size is 1515073062  speedup is 21.95
+
+real	1m34.439s
+user	0m0.820s
+sys	0m0.688s
+$
+
+$ du -h oracle/
+...
+1.5G	oracle/
+$
+
+$ cd oracle/
+$ find . | wc -l
+10655
+$
+
+Verify count against tomprod:
+ssh tomprod
+su
+cd /usr/local
+du -h oracle
+1.5G	oracle/product
+1.5G	oracle
+$  
+
+$ find . | wc -l
+10652
+$
+
+Size and counts for tomdev copy look good.
+
+
+Copy from tomprod to tomtest
+===========================
+Found that tomtest already has a copy of /usr/local/oracle:
+
+ssh tomtest
+su
+cd /usr/local/
+du -h oracle/
+...
+1.5G	oracle/
+$
+
+cd oracle/
+find . | wc -l
+10559
+
+Size and counts on tomtest good.
+Granted compared to tomprod, tomtest is lacking:
+  10652 tomprod - 10559 tomtest = 93 files short
+
+Ignoring above for now.
