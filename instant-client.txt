@@ -1,0 +1,6 @@
+instant-client.txt
+Created Thu Oct 17 13:04:55 AKDT 2019
+Copyright (C) 2019 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Oracle Instant Client
